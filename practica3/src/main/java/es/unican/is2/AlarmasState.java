@@ -4,6 +4,8 @@
 
 package es.unican.is2;
 
+import java.util.Date;
+
 public class AlarmasState
 {
 	private static Desprogramado estadoDesprogramado = new Desprogramado();
@@ -16,7 +18,7 @@ public class AlarmasState
 		return estadoDesprogramado;
 	}
 	
-	public Alarma nuevaAlarma( Alarmas context, String id, date hora )
+	public Alarma nuevaAlarma( Alarmas context, String id, Date hora )
 	{
 		return null;
 	}

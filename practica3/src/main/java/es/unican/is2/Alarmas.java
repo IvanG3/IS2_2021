@@ -14,7 +14,7 @@ public class Alarmas
 	
 	private AlarmasState state;
 	
-	public Alarma alarma( String id )
+	public Alarma alarma( String id ) // NO SE COMO SE HACE
 	{
 		return null;
 	}
@@ -24,37 +24,39 @@ public class Alarmas
 	 */
 	public boolean anhadeAlarma( Alarma a )
 	{
-		return false;
+		state.alarmaOn(this, a.id());
+		return true;
 	}
 	
 	public boolean eliminaAlarma( Alarma a )
 	{
-		return false;
+		state.borraAlarma(this, a.id());
+		return true;
 	}
 	
-	public Alarma alarmaMasProxima( )
+	public Alarma alarmaMasProxima( ) // NO SE
 	{
 		return null;
 	}
 	
 	public void desactivaAlarma( Alarma a )
 	{
-		
+		state.alarmaOff(this, a.id());
 	}
 	
 	public void activaAlarma( Alarma a )
 	{
-		
+		state.alarmaOn(this, a.id());
 	}
 	
 	public Alarma alarmasActivas( )
 	{
-		return null;
+		return alarmasActivas;
 	}
 	
 	public Alarma alarmasDesactivadas( )
 	{
-		return null;
+		return alarmasDesactivadas;
 	}
 	
 	public void activarMelodía( )
@@ -69,7 +71,7 @@ public class Alarmas
 	
 	public void setState( AlarmasState state )
 	{
-		
+		this.state = state;
 	}
 	
 	
