@@ -2,7 +2,9 @@
  * @(#) AlarmasState.java
  */
 
-package Implementacion;
+package es.unican.is2;
+
+import java.util.Date;
 
 public class AlarmasState
 {
@@ -17,7 +19,7 @@ public class AlarmasState
 		return null;
 	}
 	
-	public Alarma nuevaAlarma( Alarmas context, String id, date hora )
+	public Alarma nuevaAlarma( Alarmas context, String id, Date hora )
 	{
 		return null;
 	}
