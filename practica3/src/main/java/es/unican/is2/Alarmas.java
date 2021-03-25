@@ -4,27 +4,37 @@
 
 package es.unican.is2;
 
+import java.util.ArrayList;
+import java.util.PriorityQueue;
+import java.util.Queue;
+
 public class Alarmas
 {
 	private int INTERVALO_SONAR;
 	
-	private Alarma alarmasDesactivadas;
+	private ArrayList<Alarma> alarmasDesactivadas = new ArrayList<Alarma>();
 	
-	private Alarma alarmasActivas;
+	private Queue<Alarma> alarmasActivas = new PriorityQueue<Alarma>();
 	
 	private AlarmasState state;
 	
-	public Alarma alarma( String id ) // NO SE COMO SE HACE
+	public Alarmas( String id )
 	{
-		return null;
+		state = AlarmasState.init(this);
 	}
 	
 	/**
-	 * Añade una nueva alarma preparada para sonar. Retorna true si ese añade y false si no se añade porque ya existe una alarma para la misma hora.
+	 * Añade una nueva alarma preparada para sonar. Retorna true si ese añade y 
+	 * false si no se añade porque ya existe una alarma para la misma hora.
 	 */
 	public boolean anhadeAlarma( Alarma a )
 	{
-		state.alarmaOn(this, a.id());
+		for (Alarma alarma : alarmasActivas) {
+			if (alarma.hora().equals(a.hora())) {
+				return false;
+			}
+		}
+		alarmasActivas.add(a);
 		return true;
 	}
 	
@@ -34,9 +44,9 @@ public class Alarmas
 		return true;
 	}
 	
-	public Alarma alarmaMasProxima( ) // NO SE
+	public Alarma alarmaMasProxima( )
 	{
-		return null;
+		return alarmasActivas.peek();
 	}
 	
 	public void desactivaAlarma( Alarma a )
@@ -49,30 +59,29 @@ public class Alarmas
 		state.alarmaOn(this, a.id());
 	}
 	
-	public Alarma alarmasActivas( )
+	public Queue<Alarma> alarmasActivas( )
 	{
 		return alarmasActivas;
 	}
 	
-	public Alarma alarmasDesactivadas( )
+	public ArrayList<Alarma> alarmasDesactivadas( )
 	{
 		return alarmasDesactivadas;
 	}
 	
 	public void activarMelodía( )
 	{
-		
+		// FALTA
 	}
 	
 	public void desactivarMelodía( )
 	{
-		
+		// FALTA
 	}
 	
 	public void setState( AlarmasState state )
 	{
 		this.state = state;
 	}
-	
 	
 }
