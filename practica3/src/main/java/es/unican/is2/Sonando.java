@@ -2,7 +2,7 @@
  * @(#) Sonando.java
  */
 
-package Implementacion;
+package es.unican.is2;
 
 public class Sonando extends AlarmasState
 {

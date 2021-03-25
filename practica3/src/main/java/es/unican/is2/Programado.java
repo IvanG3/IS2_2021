@@ -2,7 +2,7 @@
  * @(#) Programado.java
  */
 
-package Implementacion;
+package es.unican.is2;
 
 public class Programado extends AlarmasState
 {

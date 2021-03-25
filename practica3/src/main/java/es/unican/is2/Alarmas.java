@@ -2,7 +2,7 @@
  * @(#) Alarmas.java
  */
 
-package Implementacion;
+package es.unican.is2;
 
 public class Alarmas
 {
