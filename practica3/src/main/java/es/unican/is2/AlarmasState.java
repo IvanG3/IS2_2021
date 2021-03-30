@@ -38,20 +38,11 @@ public class AlarmasState
 		return estadoSonando;
 	};
 	
-	public void entryAction( Alarmas context )
-	{
-		
-	}
+	public void entryAction( Alarmas context ) {}
 	
-	public void exitAction( Alarmas context )
-	{
-		
-	}
+	public void exitAction( Alarmas context ) {}
 	
-	public void doAction( Alarmas context )
-	{
-		
-	}
+	public void doAction( Alarmas context ) {}
 	
 	
 }
