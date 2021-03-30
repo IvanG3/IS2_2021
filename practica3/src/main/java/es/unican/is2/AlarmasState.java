@@ -44,5 +44,4 @@ public class AlarmasState
 	
 	public void doAction( Alarmas context ) {}
 	
-	
 }
