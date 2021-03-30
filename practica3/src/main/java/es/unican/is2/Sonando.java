@@ -18,12 +18,12 @@ public class Sonando extends AlarmasState
 	
 	public void entryAction( Alarmas context )
 	{
-		
+		// FALTA
 	}
 	
 	public void exitAction( Alarmas context )
 	{
-		
+		// FALTA
 	}
 	
 	
