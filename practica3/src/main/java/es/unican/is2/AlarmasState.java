@@ -8,6 +8,8 @@ import java.util.Date;
 
 public class AlarmasState
 {
+	public TimedStateController controlador = TimedStateController.getInstance();
+	
 	private static Desprogramado estadoDesprogramado = new Desprogramado();
 	private static Programado estadoProgramado = new Programado();
 	private static Sonando estadoSonando = new Sonando();
@@ -23,18 +25,18 @@ public class AlarmasState
 		return null;
 	}
 	
-	public void apagar( Alarmas context ) {};	
+	public void apagar( Alarmas context ) {}	
 	public void alarmaOff( Alarmas context, String id ) {};
 	public void alarmaOn( Alarmas context, String id ) {};
 	public void borraAlarma( Alarmas context, String id ) {};
 	
-	public static AlarmasState getEstadoDesprogramado() {
+	public static Desprogramado getEstadoDesprogramado() {
 		return estadoDesprogramado;
 	};
-	public static AlarmasState getEstadoProgramado() {
+	public static Programado getEstadoProgramado() {
 		return estadoProgramado;
 	};
-	public static AlarmasState getEstadoSonando() {
+	public static Sonando getEstadoSonando() {
 		return estadoSonando;
 	};
 	

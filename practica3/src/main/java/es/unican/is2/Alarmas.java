@@ -13,9 +13,7 @@ public class Alarmas
 	private int INTERVALO_SONAR;
 	
 	private ArrayList<Alarma> alarmasDesactivadas = new ArrayList<Alarma>();
-	
 	private Queue<Alarma> alarmasActivas = new PriorityQueue<Alarma>();
-	
 	private AlarmasState state;
 	
 	public Alarmas( String id )
