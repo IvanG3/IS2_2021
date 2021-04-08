@@ -14,14 +14,12 @@ public class AlarmasState
 	private static Programado estadoProgramado = new Programado();
 	private static Sonando estadoSonando = new Sonando();
 	
-	public static AlarmasState init( Alarmas context )
-	{
+	public static AlarmasState init( Alarmas context ) {
 		estadoDesprogramado.entryAction(context);
 		return estadoDesprogramado;
 	}
 	
-	public Alarma nuevaAlarma( Alarmas context, String id, Date hora )
-	{
+	public Alarma nuevaAlarma( Alarmas context, String id, Date hora ) {
 		return null;
 	}
 	

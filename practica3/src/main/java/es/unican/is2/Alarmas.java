@@ -21,6 +21,36 @@ public class Alarmas
 		state = AlarmasState.init(this);
 	}
 	
+	public Alarma getAlarmaActiva( String id ) {
+		for (Alarma a : alarmasActivas) {
+			if (a.id().equals(id)) {
+				return a;
+			}
+		}
+		return null;
+	}
+	
+	public Alarma getAlarmaInactiva( String id ) {
+		for (Alarma a : alarmasDesactivadas) {
+			if (a.id().equals(id)) {
+				return a;
+			}
+		}
+		return null;
+	}
+	
+	public Alarma alarma( String id ) {
+		Alarma a = getAlarmaActiva(id);
+		if (a == null) {
+			a = getAlarmaInactiva(id);
+		}
+		return a;
+	}
+	
+	public int getIntervalo() {
+		return INTERVALO_SONAR;
+	}
+	
 	/**
 	 * Añade una nueva alarma preparada para sonar. Retorna true si ese añade y 
 	 * false si no se añade porque ya existe una alarma para la misma hora.
@@ -38,8 +68,19 @@ public class Alarmas
 	
 	public boolean eliminaAlarma( Alarma a )
 	{
-		state.borraAlarma(this, a.id());
-		return true;
+		for (Alarma al : alarmasDesactivadas) {
+			if (al.id().equals(a.id())) {
+				alarmasDesactivadas.remove(a);
+				return true;
+			}
+		}
+		for (Alarma al : alarmasActivas) {
+			if (al.id().equals(a.id())) {
+				alarmasActivas.remove(a);
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public Alarma alarmaMasProxima( )
@@ -49,12 +90,22 @@ public class Alarmas
 	
 	public void desactivaAlarma( Alarma a )
 	{
-		state.alarmaOff(this, a.id());
+		for (Alarma al : alarmasActivas) {
+			if (al.id().equals(a.id())) {
+				alarmasDesactivadas.add(a);
+				alarmasActivas.remove(a);
+			}
+		}
 	}
 	
 	public void activaAlarma( Alarma a )
 	{
-		state.alarmaOn(this, a.id());
+		for (Alarma al : alarmasDesactivadas) {
+			if (al.id().equals(a.id())) {
+				alarmasActivas.add(a);
+				alarmasDesactivadas.remove(a);
+			}
+		}
 	}
 	
 	public Queue<Alarma> alarmasActivas( )
