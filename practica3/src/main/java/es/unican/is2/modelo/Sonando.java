@@ -2,7 +2,7 @@
  * @(#) Sonando.java
  */
 
-package es.unican.is2;
+package es.unican.is2.modelo;
 
 public class Sonando extends AlarmasState implements TimedState
 {

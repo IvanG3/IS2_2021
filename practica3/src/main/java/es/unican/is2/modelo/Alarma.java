@@ -2,7 +2,7 @@
  * @(#) Alarma.java
  */
 
-package es.unican.is2;
+package es.unican.is2.modelo;
 
 import java.util.Comparator;
 import java.util.Date;

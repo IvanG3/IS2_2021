@@ -2,7 +2,7 @@
  * @(#) Programado.java
  */
 
-package es.unican.is2;
+package es.unican.is2.modelo;
 
 public class Programado extends AlarmasState implements TimedState
 {

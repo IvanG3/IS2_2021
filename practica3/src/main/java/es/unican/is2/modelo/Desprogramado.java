@@ -2,7 +2,7 @@
  * @(#) Desprogramado.java
  */
 
-package es.unican.is2;
+package es.unican.is2.modelo;
 
 public class Desprogramado extends AlarmasState
 {

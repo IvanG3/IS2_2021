@@ -2,7 +2,7 @@
  * @(#) Alarmas.java
  */
 
-package es.unican.is2;
+package es.unican.is2.modelo;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;

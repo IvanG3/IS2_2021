@@ -1,7 +1,9 @@
-package es.unican.is2;
+package es.unican.is2.vista;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
@@ -96,28 +98,47 @@ public class VentanaAlarmas extends JFrame {
 
 		JButton btnNuevaAlarma = new JButton("Nueva Alarma");
 		btnNuevaAlarma.setBounds(45, 118, 181, 21);
-		btnNuevaAlarma.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
+		btnNuevaAlarma.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//TODO: crear alarma
 			}
 		});
 		contentPane.add(btnNuevaAlarma);
 
 		JButton btnApagar = new JButton("Apagar");
 		btnApagar.setBounds(45, 161, 181, 56);
+		btnApagar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//TODO: dejar de sonar
+			}
+		});
 		contentPane.add(btnApagar);
 
 		JButton btnOn = new JButton("On");
 		btnOn.setBounds(281, 196, 47, 21);
+		btnOn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//TODO: activar
+			}
+		});
 		contentPane.add(btnOn);
 
 		JButton btnOff = new JButton("Off");
 		btnOff.setBounds(338, 196, 47, 21);
+		btnOff.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//TODO: desactivar
+			}
+		});
 		contentPane.add(btnOff);
 
 		JButton btnEliminar = new JButton("Eliminar");
 		btnEliminar.setBounds(281, 227, 104, 21);
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//TODO: borrar
+			}
+		});
 		contentPane.add(btnEliminar);
 	}
 }
