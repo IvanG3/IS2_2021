@@ -4,11 +4,15 @@
 
 package es.unican.is2.modelo;
 
+import java.util.Date;
+
 public class Desprogramado extends AlarmasState
 {
-	public void nuevaAlarma( Alarmas context )	{
-		context.anhadeAlarma(new Alarma());
+	public Alarma nuevaAlarma( Alarmas context, String id, Date hora )	{
+		Alarma a = new Alarma(id, hora);
+		context.anhadeAlarma(a);
 		context.setState(AlarmasState.getEstadoProgramado());
+		return a;
 	}
 	
 	public void alarmaOn( Alarmas context, String id )	{

@@ -22,6 +22,7 @@ public class Sonando extends AlarmasState implements TimedState
 
 	public void entryAction(Alarmas context) {
 		controlador.startRelative(context, this, context.getIntervalo());
+		context.activarMelodía();
 	}
 
 	public void exitAction( Alarmas context ) {

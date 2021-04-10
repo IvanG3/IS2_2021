@@ -1,144 +1,170 @@
 package es.unican.is2.vista;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.text.SimpleDateFormat;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
-import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
-import javax.swing.text.DateFormatter;
-import javax.swing.text.DefaultFormatterFactory;
+
+import es.unican.is2.modelo.Alarma;
+import es.unican.is2.modelo.Alarmas;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 import java.util.Date;
+import java.util.Queue;
+import java.util.ArrayList;
 import java.util.Calendar;
-import javax.swing.JTextPane;
+import javax.swing.Action;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JList;
 
-public class VentanaAlarmas extends JFrame {
-
-	private JPanel contentPane;
-	private JTextField textFieldID;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaAlarmas frame = new VentanaAlarmas();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+@SuppressWarnings("serial")
+public class VentanaAlarmas extends JFrame implements PropertyChangeListener {
+	private Alarmas misAlarmas;
+	private JLabel lblIDAlarma = new JLabel("ID Alarma");
+	private JLabel lblHoraAlarma = new JLabel("Hora Alarma");
+	private JTextField textFieldID = new JTextField();
+	private Date date = new Date();
+	private SpinnerDateModel sm = new SpinnerDateModel(date, null, null, Calendar.MINUTE);
+	private JSpinner spinnerHora = new JSpinner(sm);
+	private JSpinner.DateEditor de = new JSpinner.DateEditor(spinnerHora, "hh:mm a");
+	private JLabel lblAlarmasActivas = new JLabel("Alarmas Activas");
+	private DefaultListModel<String> modelActivas = new DefaultListModel<String>();
+	private JList<String> listActivas = new JList<String>(modelActivas);
+	private JScrollPane listScrollerActivas = new JScrollPane();
+	private JLabel lblAlarmasDesactivadas = new JLabel("Alarmas Desactivadas");
+	private DefaultListModel<String> modelDesactivadas = new DefaultListModel<String>();
+	private JList<String> listDesactivadas = new JList<String>(modelDesactivadas);
+	private JScrollPane listScrollerDesactivadas = new JScrollPane();
+	private JButton btnNuevaAlarma = new JButton("Nueva Alarma");
+	private JButton btnApagar = new JButton("Apagar");
+	private JButton btnOn = new JButton("On");
+	private JButton btnOff = new JButton("Off");
+	private JButton btnEliminar = new JButton("Eliminar");
+	JPanel contentPane = new JPanel();
 
 	/**
 	 * Create the frame.
 	 */
-	public VentanaAlarmas() {
-		super("Alarmas");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public VentanaAlarmas(Alarmas a) {
+		misAlarmas = a;
+		misAlarmas.addPropertyChangeListener(this);
+		init();
 		setBounds(100, 100, 450, 300);
+	}
+
+	public void init() {
+		setTitle("Alarmas");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblIDAlarma = new JLabel("ID Alarma");
 		lblIDAlarma.setBounds(45, 35, 64, 13);
 		contentPane.add(lblIDAlarma);
 
-		JLabel lblHoraAlarma = new JLabel("Hora Alarma");
 		lblHoraAlarma.setBounds(45, 72, 64, 13);
 		contentPane.add(lblHoraAlarma);
 
-		textFieldID = new JTextField();
 		textFieldID.setBounds(130, 32, 96, 19);
 		contentPane.add(textFieldID);
 		textFieldID.setColumns(10);
 
-		Date date = new Date();
-		SpinnerDateModel sm = new SpinnerDateModel(date, null, null, Calendar.MINUTE);
-		JSpinner spinnerHora = new JSpinner(sm);
-
-		JSpinner.DateEditor de = new JSpinner.DateEditor(spinnerHora, "hh:mm a");
 		de.getTextField().setEditable( false );
 		spinnerHora.setEditor(de);
 		spinnerHora.setModel(new SpinnerDateModel(new Date(), null, null, Calendar.HOUR_OF_DAY));
 		spinnerHora.setBounds(130, 69, 96, 20);
 		contentPane.add(spinnerHora);
 
-		JLabel lblAlarmasActivas = new JLabel("Alarmas Activas");
 		lblAlarmasActivas.setBounds(281, 10, 104, 13);
 		contentPane.add(lblAlarmasActivas);
+		
+		listScrollerActivas.setBounds(281, 24, 104, 61);
+		listScrollerActivas.setViewportView(listActivas);
+		contentPane.add(listScrollerActivas);
 
-		JTextPane textPaneActivas = new JTextPane();
-		textPaneActivas.setBounds(281, 21, 104, 68);
-		contentPane.add(textPaneActivas);
-
-		JLabel lblAlarmasDesactivadas = new JLabel("Alarmas Desactivadas");
 		lblAlarmasDesactivadas.setBounds(281, 99, 104, 13);
 		contentPane.add(lblAlarmasDesactivadas);
 
-		JTextPane textPaneDesactivadas = new JTextPane();
-		textPaneDesactivadas.setBounds(281, 113, 104, 68);
-		contentPane.add(textPaneDesactivadas);
+		listScrollerDesactivadas.setBounds(281, 113, 104, 68);
+		listScrollerDesactivadas.setViewportView(listDesactivadas);
+		contentPane.add(listScrollerDesactivadas);
 
-		JButton btnNuevaAlarma = new JButton("Nueva Alarma");
 		btnNuevaAlarma.setBounds(45, 118, 181, 21);
-		btnNuevaAlarma.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//TODO: crear alarma
-			}
-		});
 		contentPane.add(btnNuevaAlarma);
 
-		JButton btnApagar = new JButton("Apagar");
 		btnApagar.setBounds(45, 161, 181, 56);
-		btnApagar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//TODO: dejar de sonar
-			}
-		});
 		contentPane.add(btnApagar);
 
-		JButton btnOn = new JButton("On");
-		btnOn.setBounds(281, 196, 47, 21);
-		btnOn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//TODO: activar
-			}
-		});
+		btnOn.setBounds(281, 196, 51, 21);
 		contentPane.add(btnOn);
 
-		JButton btnOff = new JButton("Off");
-		btnOff.setBounds(338, 196, 47, 21);
-		btnOff.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//TODO: desactivar
-			}
-		});
+		btnOff.setBounds(334, 196, 51, 21);
 		contentPane.add(btnOff);
 
-		JButton btnEliminar = new JButton("Eliminar");
 		btnEliminar.setBounds(281, 227, 104, 21);
-		btnEliminar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//TODO: borrar
-			}
-		});
 		contentPane.add(btnEliminar);
+	}
+
+	public void setNuevaAction(Action action) {
+		btnNuevaAlarma.setAction(action);
+	}
+
+	public void setApagarAction(Action action) {
+		btnApagar.setAction(action);
+	}
+
+	public void setOnAction(Action action) {
+		btnOn.setAction(action);
+	}
+
+	public void setOffAction(Action action) {
+		btnOff.setAction(action);
+	}
+
+	public void setEliminarAction(Action action) {
+		btnEliminar.setAction(action);
+	}
+
+	public String getId() {
+		return textFieldID.getText();
+	}
+
+	public String getDate() {
+		return de.getFormat().format(spinnerHora.getValue());
+	}
+	
+	public String getActivaSeleccionada() {
+		return listActivas.getSelectedValue();
+	}
+	
+	public String getDesactivadaSeleccionada() {
+		return listDesactivadas.getSelectedValue();
+	}
+
+	public void propertyChange(PropertyChangeEvent e) {
+		if (e.getPropertyName().equals("activa")) {
+			@SuppressWarnings("unchecked")
+			Queue<Alarma> alarmasActivas = (Queue<Alarma>) e.getNewValue();
+			modelActivas.clear();
+			for (Alarma al : alarmasActivas) {
+				modelActivas.addElement(al.id());
+			}
+		} else if (e.getPropertyName().equals("desactivadas")) {
+			@SuppressWarnings("unchecked")
+			ArrayList<Alarma> alarmasDesactivadas = (ArrayList<Alarma>) e.getNewValue();
+			modelDesactivadas.clear();
+			for (Alarma al : alarmasDesactivadas) {
+				modelDesactivadas.addElement(al.id());
+			}
+		}
 	}
 }

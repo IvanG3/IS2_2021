@@ -4,14 +4,16 @@
 
 package es.unican.is2.modelo;
 
-import java.util.Comparator;
 import java.util.Date;
 
-public class Alarma implements Comparator<Alarma>
-{
+public class Alarma implements Comparable<Alarma> {
 	private String id;
-	
 	private Date hora;
+	
+	public Alarma(String id, Date hora) {
+		this.id = id;
+		this.hora = hora;
+	}
 	
 	public String id()
 	{
@@ -23,11 +25,11 @@ public class Alarma implements Comparator<Alarma>
 		return hora;
 	}
 
-	public int compare(Alarma o1, Alarma o2) {
-		if (o1.hora().after(o2.hora())) {
+	public int compareTo(Alarma a) {
+		if (hora.after(a.hora())) {
 			return 1;
 		}
-		return -1;
+		return 0;
 	}
 	
 }
