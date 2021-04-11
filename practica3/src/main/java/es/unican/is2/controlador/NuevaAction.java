@@ -27,8 +27,8 @@ public class NuevaAction extends AbstractAction {
 		String id = vista.getId();
 		Date hora;
 		try {
-			hora = new SimpleDateFormat("hh:mm a").parse(vista.getDate());
-			modelo.anhadeAlarma(new Alarma(id, hora));
+			hora = new SimpleDateFormat("dd/MM/yyyy hh:mm a").parse(vista.getDate());
+			modelo.getState().nuevaAlarma(modelo, id, hora);
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}

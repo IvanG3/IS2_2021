@@ -26,10 +26,7 @@ public class Alarma implements Comparable<Alarma> {
 	}
 
 	public int compareTo(Alarma a) {
-		if (hora.after(a.hora())) {
-			return 1;
-		}
-		return 0;
+		return hora.compareTo(a.hora());
 	}
 	
 }

@@ -22,7 +22,8 @@ public class TimedStateController {
 	}
 	
 	public void cancel() {
-		
+		timer.cancel();
+		timer = new Timer();
 	}
 	
 	private class Task extends TimerTask {

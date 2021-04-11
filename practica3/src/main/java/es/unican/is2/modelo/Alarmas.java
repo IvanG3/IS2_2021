@@ -11,7 +11,7 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class Alarmas {
-	private int INTERVALO_SONAR;
+	private int INTERVALO_SONAR = 5000;
 
 	private ArrayList<Alarma> alarmasDesactivadas = new ArrayList<Alarma>();
 	private Queue<Alarma> alarmasActivas = new PriorityQueue<Alarma>();
@@ -40,6 +40,14 @@ public class Alarmas {
 		}
 		return null;
 	}
+	
+	public int getIntervalo() {
+		return INTERVALO_SONAR;
+	}
+	
+	public AlarmasState getState() {
+		return state;
+	}
 
 	public Alarma alarma( String id ) {
 		Alarma a = getAlarmaActiva(id);
@@ -47,10 +55,6 @@ public class Alarmas {
 			a = getAlarmaInactiva(id);
 		}
 		return a;
-	}
-
-	public int getIntervalo() {
-		return INTERVALO_SONAR;
 	}
 
 	/**
@@ -113,15 +117,19 @@ public class Alarmas {
 	public void activaAlarma( Alarma a ) {
 		ArrayList<Alarma> alarmasDesactivadasVieja = new ArrayList<Alarma>(alarmasDesactivadas);
 		Queue<Alarma> alarmasActivasVieja = new PriorityQueue<Alarma>(alarmasActivas);
+		boolean estaEnLista = false;
 
 		for (Alarma al : alarmasDesactivadas) {
 			if (al.id().equals(a.id())) {
-				alarmasActivas.add(a);
-				alarmasDesactivadas.remove(a);
-
-				changeSupport.firePropertyChange("desactivadas", alarmasDesactivadasVieja, alarmasDesactivadas);
-				changeSupport.firePropertyChange("activa", alarmasActivasVieja, alarmasActivas);
+				estaEnLista = true;
 			}
+		}
+		if (estaEnLista) {
+			alarmasActivas.add(a);
+			alarmasDesactivadas.remove(a);
+
+			changeSupport.firePropertyChange("desactivadas", alarmasDesactivadasVieja, alarmasDesactivadas);
+			changeSupport.firePropertyChange("activa", alarmasActivasVieja, alarmasActivas);
 		}
 	}
 
