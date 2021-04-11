@@ -33,7 +33,7 @@ public class VentanaAlarmas extends JFrame implements PropertyChangeListener {
 	private Date date = new Date();
 	private SpinnerDateModel sm = new SpinnerDateModel(date, null, null, Calendar.MINUTE);
 	private JSpinner spinnerHora = new JSpinner(sm);
-	private JSpinner.DateEditor de = new JSpinner.DateEditor(spinnerHora, "hh:mm a");
+	private JSpinner.DateEditor de = new JSpinner.DateEditor(spinnerHora, "dd/MM/yyyy hh:mm a");
 	private JLabel lblAlarmasActivas = new JLabel("Alarmas Activas");
 	private DefaultListModel<String> modelActivas = new DefaultListModel<String>();
 	private JList<String> listActivas = new JList<String>(modelActivas);
@@ -68,49 +68,49 @@ public class VentanaAlarmas extends JFrame implements PropertyChangeListener {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		lblIDAlarma.setBounds(45, 35, 64, 13);
+		lblIDAlarma.setBounds(20, 35, 77, 13);
 		contentPane.add(lblIDAlarma);
 
-		lblHoraAlarma.setBounds(45, 72, 64, 13);
+		lblHoraAlarma.setBounds(20, 72, 77, 13);
 		contentPane.add(lblHoraAlarma);
 
-		textFieldID.setBounds(130, 32, 96, 19);
+		textFieldID.setBounds(101, 32, 141, 19);
 		contentPane.add(textFieldID);
 		textFieldID.setColumns(10);
 
 		de.getTextField().setEditable( false );
 		spinnerHora.setEditor(de);
-		spinnerHora.setModel(new SpinnerDateModel(new Date(), null, null, Calendar.HOUR_OF_DAY));
-		spinnerHora.setBounds(130, 69, 96, 20);
+		spinnerHora.setModel(new SpinnerDateModel(new Date(), null, null, Calendar.DATE));
+		spinnerHora.setBounds(101, 69, 141, 20);
 		contentPane.add(spinnerHora);
 
-		lblAlarmasActivas.setBounds(281, 10, 104, 13);
+		lblAlarmasActivas.setBounds(281, 10, 124, 13);
 		contentPane.add(lblAlarmasActivas);
 		
-		listScrollerActivas.setBounds(281, 24, 104, 61);
+		listScrollerActivas.setBounds(281, 24, 124, 61);
 		listScrollerActivas.setViewportView(listActivas);
 		contentPane.add(listScrollerActivas);
 
-		lblAlarmasDesactivadas.setBounds(281, 99, 104, 13);
+		lblAlarmasDesactivadas.setBounds(281, 99, 124, 13);
 		contentPane.add(lblAlarmasDesactivadas);
 
-		listScrollerDesactivadas.setBounds(281, 113, 104, 68);
+		listScrollerDesactivadas.setBounds(281, 113, 124, 68);
 		listScrollerDesactivadas.setViewportView(listDesactivadas);
 		contentPane.add(listScrollerDesactivadas);
 
-		btnNuevaAlarma.setBounds(45, 118, 181, 21);
+		btnNuevaAlarma.setBounds(20, 118, 222, 21);
 		contentPane.add(btnNuevaAlarma);
 
-		btnApagar.setBounds(45, 161, 181, 56);
+		btnApagar.setBounds(20, 161, 222, 56);
 		contentPane.add(btnApagar);
 
-		btnOn.setBounds(281, 196, 51, 21);
+		btnOn.setBounds(281, 196, 57, 21);
 		contentPane.add(btnOn);
 
-		btnOff.setBounds(334, 196, 51, 21);
+		btnOff.setBounds(348, 196, 57, 21);
 		contentPane.add(btnOff);
 
-		btnEliminar.setBounds(281, 227, 104, 21);
+		btnEliminar.setBounds(281, 227, 124, 21);
 		contentPane.add(btnEliminar);
 	}
 

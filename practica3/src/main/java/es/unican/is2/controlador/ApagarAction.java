@@ -1,6 +1,7 @@
 package es.unican.is2.controlador;
 
 import java.awt.event.ActionEvent;
+import java.util.Date;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -22,7 +23,9 @@ public class ApagarAction extends AbstractAction {
 
 	public void actionPerformed(ActionEvent e) {
 		Alarma alarma = modelo.alarmaMasProxima();
-		modelo.desactivarMelodía();
-		modelo.desactivaAlarma(alarma);
+		if (alarma != null && alarma.hora().before(new Date(System.currentTimeMillis()))) {
+			modelo.getState().apagar(modelo);
+			modelo.getState().alarmaOff(modelo, alarma.id());
+		}
 	}
 }

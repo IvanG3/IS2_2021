@@ -24,7 +24,7 @@ public class OffAction extends AbstractAction {
 		String id = vista.getActivaSeleccionada();
 		try {
 			if (id != null) {
-				modelo.desactivaAlarma(modelo.getAlarmaActiva(id));
+				modelo.getState().alarmaOff(modelo, id);
 			}
 		} catch (java.util.ConcurrentModificationException ex) { }
 	}

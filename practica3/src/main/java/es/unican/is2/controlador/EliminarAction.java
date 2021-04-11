@@ -27,7 +27,7 @@ public class EliminarAction extends AbstractAction {
 		}
 		try {
 			if (id != null) {
-				modelo.eliminaAlarma(modelo.alarma(id));
+				modelo.getState().borraAlarma(modelo, id);
 			}
 		} catch (java.util.ConcurrentModificationException ex) { }
 	}
