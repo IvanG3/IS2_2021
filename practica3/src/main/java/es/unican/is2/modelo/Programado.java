@@ -1,13 +1,8 @@
-/**
- * @(#) Programado.java
- */
-
 package es.unican.is2.modelo;
 
 import java.util.Date;
 
-public class Programado extends AlarmasState implements TimedState
-{
+public class Programado extends AlarmasState implements TimedState {
 	TimedStateController controlador = TimedStateController.getInstance();
 	
 	public void entryAction(Alarmas context, Alarma a) {

@@ -1,7 +1,3 @@
-/**
- * @(#) Desprogramado.java
- */
-
 package es.unican.is2.modelo;
 
 import java.util.Date;

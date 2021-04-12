@@ -165,6 +165,24 @@ public class VentanaAlarmas extends JFrame implements PropertyChangeListener {
 			for (Alarma al : alarmasDesactivadas) {
 				modelDesactivadas.addElement(al.id());
 			}
+		} else if (e.getPropertyName().equals("sonando")) {
+			modelActivas.clear();
+			modelDesactivadas.clear();
+			modelActivas.addElement("Sonando");
+			modelDesactivadas.addElement("Sonando");
+		} else if (e.getPropertyName().equals("parado")) {
+			@SuppressWarnings("unchecked")
+			Queue<Alarma> alarmasActivas = (Queue<Alarma>) e.getOldValue();
+			modelActivas.clear();
+			for (Alarma al : alarmasActivas) {
+				modelActivas.addElement(al.id());
+			}
+			@SuppressWarnings("unchecked")
+			ArrayList<Alarma> alarmasDesactivadas = (ArrayList<Alarma>) e.getNewValue();
+			modelDesactivadas.clear();
+			for (Alarma al : alarmasDesactivadas) {
+				modelDesactivadas.addElement(al.id());
+			}
 		}
 	}
 }

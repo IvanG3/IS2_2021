@@ -1,7 +1,3 @@
-/**
- * @(#) Alarmas.java
- */
-
 package es.unican.is2.modelo;
 
 import java.beans.PropertyChangeListener;
@@ -143,10 +139,12 @@ public class Alarmas {
 
 	public void activarMelodía( ) {
 		System.out.println("Sonando " + alarmaMasProxima().id());
+		changeSupport.firePropertyChange("sonando", null, null);
 	}
 
 	public void desactivarMelodía( ) {
 		System.out.println("Melodia parada.");
+		changeSupport.firePropertyChange("parado", alarmasActivas, alarmasDesactivadas);
 	}
 
 	public void setState( AlarmasState state ) {

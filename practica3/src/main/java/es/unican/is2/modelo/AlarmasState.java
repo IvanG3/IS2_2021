@@ -1,7 +1,3 @@
-/**
- * @(#) AlarmasState.java
- */
-
 package es.unican.is2.modelo;
 
 import java.util.Date;
@@ -14,7 +10,6 @@ public class AlarmasState {
 	private static Sonando estadoSonando = new Sonando();
 	
 	public static AlarmasState init( Alarmas context ) {
-		//estadoDesprogramado.entryAction(context);
 		return estadoDesprogramado;
 	}
 	
