@@ -5,7 +5,33 @@
 	<groupId>es.unican.is2</groupId>
 	<artifactId>Practica4</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>practica4</name>
+	<name>Practica4</name>
+
+	<packaging>jar</packaging>
+
+	<build>
+		<plugins>
+			<plugin>
+
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.2.0</version>
+				
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>
+								es.unican.is2.modelo.SegurosGUI
+							</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+
+		</plugins>
+
+	</build>
+
 
 	<dependencies>
 		<dependency>
@@ -19,9 +45,9 @@
 			<version>1.2.1</version>
 		</dependency>
 		<dependency>
-			<groupId>es.unican.is2.modelo</groupId>
+			<groupId>es.unican.is2</groupId>
 			<artifactId>ListaOrdenada</artifactId>
 			<version>0.0.1</version>
-		</dependency>		
+		</dependency>
 	</dependencies>
 </project>
