@@ -6,8 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import es.unican.is2.modelo.*;
-
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
@@ -86,6 +84,7 @@ public class SegurosGUI extends JFrame {
 					int potencia = Integer.parseInt(txtPotencia.getText());
 			    	Cobertura cobertura = Cobertura.valueOf(comboCobertura.getSelectedItem().toString());
 			    	Seguro seguro = new Seguro(potencia, new Cliente("Pepe", "12345678A", minusvalia), cobertura);
+			    	seguro.setFechaUltimoSiniestro(fechaUltimoSiniestro);
 			    	precio = seguro.precio();
 			    	txtPrecio.setText(Double.toString(precio));
 			    	
