@@ -1,11 +1,6 @@
-/**
- * @(#) Sonando.java
- */
-
 package es.unican.is2.modelo;
 
-public class Sonando extends AlarmasState implements TimedState
-{
+public class Sonando extends AlarmasState implements TimedState {
 	TimedStateController controlador = TimedStateController.getInstance();
 
 	public void apagar( Alarmas context ) {
