@@ -1,13 +1,17 @@
 package es.unican.is2.practica5;
 
+import java.time.LocalDate;
+
 public abstract class Tarjeta {
 	protected String mNumero, mTitular;		
 	protected CuentaAhorro mCuentaAsociada;
+	protected LocalDate fechaCaducidad;
 
-	public Tarjeta(String numero, String titular, CuentaAhorro c) {  // CC = +1, Ccog = 0
+	public Tarjeta(String numero, String titular, CuentaAhorro cuentaAsociada, LocalDate fechaCad) {  // CC = +1, Ccog = 0
 		mNumero = numero;
 		mTitular = titular;
-		mCuentaAsociada = c;
+		mCuentaAsociada = cuentaAsociada;
+		fechaCaducidad = fechaCad;
 	}
 
 	/**
@@ -27,5 +31,13 @@ public abstract class Tarjeta {
 	 */
 	public abstract void pagoEnEstablecimiento(String datos, double x)
 			throws saldoInsuficienteException, datoErroneoException;
+	
+	public LocalDate getCaducidad() {
+		return fechaCaducidad;
+	}
+	
+	public CuentaAhorro getCuentaAsociada(CuentaAhorro cuentaAsociada) {
+		return cuentaAsociada;
+	}
 	
 }

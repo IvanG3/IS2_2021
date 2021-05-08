@@ -5,9 +5,10 @@ import java.time.LocalDate;
 public class Debito extends Tarjeta {
 	
 	private double saldoDiarioDisponible;
+	static final int LIMITE_DEBITO = 1000;
 
-	public Debito(String numero, String titular, CuentaAhorro c) {  // CC = +1, Ccog = 0
-		super(numero, titular, c);
+	public Debito(String numero, String titular, CuentaAhorro cuentaAsociada, LocalDate fechaCaducidad) {  // CC = +1, Ccog = 0
+		super(numero, titular, cuentaAsociada, fechaCaducidad);
 	}
 	
 	
@@ -28,20 +29,13 @@ public class Debito extends Tarjeta {
 		this.mCuentaAsociada.retirar("Compra en : " + datos, x);
 		saldoDiarioDisponible-=x;
 	}
-	
-	public LocalDate getCaducidadDebito() {  // CC = +1, Ccog = 0
-		return this.mCuentaAsociada.getCaducidadDebito();
-	}
+
 	
 	/**
 	 * Método invocado automáticamente a las 00:00 de cada día
 	 */
 	public void restableceSaldo() {  // CC = +1, Ccog = 0
-		saldoDiarioDisponible = mCuentaAsociada.getLimiteDebito();
-	}
-	
-	public CuentaAhorro getCuentaAsociada() {  // CC = +1, Ccog = 0
-		return mCuentaAsociada;
+		saldoDiarioDisponible = LIMITE_DEBITO;
 	}
 
 }
